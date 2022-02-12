@@ -12,6 +12,5 @@ $router->get('/', function () use ($router) {
 # /api/validar/paolo
 $router->group(["prefix" => "api"], function() use($router) {
     $router->get("validar/{user}", ["uses" => "UsuariosController@validar"]);
-    $router->post("validar/", ["uses" => "UsuariosController@validarUser"]);
+    $router->post("guardar", ["uses" => "UsuariosController@save"]);
 });
-

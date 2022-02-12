@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use Illuminate\Http\Client\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
@@ -21,19 +21,29 @@ class UsuariosController extends Controller
        return response()->json($res, 200);
     }
 
-    public function validarUser(Request $request)
+    public function save(Request $request)
     {
-        return response()->json([
-            "mensaje" => $request->input('nombre')
-        ]);
-    //    $user_db = Usuario::where('user', $user)->get();
+        if ($request->isJson())
+        {
+            $user = new Usuario();
+            $user->user = $request->json("user");
+            $user->password = $request->json("password");
+            $user->id_profe = $request->json("id_profesor");
 
-    //    if ($user_db->isEmpty())
-    //    {
-    //     $res = ["estado" => false, "user" => []];
-    //     return response()->json($res);
-    //    }
-    //    $res = ["estado" => true, "user" => $user_db];
-    //    return response()->json($res, 200);
+            if ($user->save())
+            {
+                return response()->json([
+                    "estado" => true,
+                    "msg" => "Usuario creado correctamente"
+                ]);
+            }
+            return response()->json([
+                "estado" => false,
+                "msg" => "No se pudo crear al usuario"
+            ]);
+        }
+        return response()->json([
+            "msg" => "Solo se acepta json"
+        ]);
     }
 }
