@@ -34,7 +34,8 @@ class UsuariosController extends Controller
                 if ($user->save()) {
                     return response()->json([
                         "estado" => true,
-                        "msg" => "Usuario creado correctamente"
+                        "msg" => "Usuario creado correctamente",
+                        "user" => $user
                     ]);
                 }
                 return response()->json([

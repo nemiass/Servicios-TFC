@@ -5,6 +5,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use App\Http\Controllers\UsuariosController;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
