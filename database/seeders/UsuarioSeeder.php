@@ -14,7 +14,7 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        Usuario::created([
+        Usuario::create([
             "user" => "admin",
             "password" => "admin",
             "tipo" => "admin"
