@@ -17,7 +17,7 @@ class CreateTableAuth extends Migration
             $table->id();
             $table->string("user");
             $table->string("password");
-            $table->unsignedInteger("id_profe");
+            $table->string("tipo");
             $table->timestamps();
         });
     }
