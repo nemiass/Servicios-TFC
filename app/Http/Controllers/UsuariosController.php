@@ -9,14 +9,20 @@ use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
 {
-    public function validar($user)
+    public function validar($user, $password)
     {
-        $user_db = Usuario::where('user', $user)->get();
-
-        if ($user_db->isEmpty()) {
+        $user_db = Usuario::where('user', $user)->first();
+        if (!$user_db)
+        {
             $res = ["estado" => false, "user" => []];
             return response()->json($res);
         }
+        if ($user_db->password != $password)
+        {
+            $res = ["estado" => false, "user" => []];
+            return response()->json($res);
+        }
+
         $res = ["estado" => true, "user" => $user_db];
         return response()->json($res, 200);
     }

@@ -11,8 +11,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-# /api/validar/paolo
+# /api/validar/paolo/1234
 $router->group(["prefix" => "api"], function() use($router) {
-    $router->get("validar/{user}", ["uses" => "UsuariosController@validar"]);
+    $router->get("validar/{user}/{password}", ["uses" => "UsuariosController@validar"]);
     $router->post("guardar", ["uses" => "UsuariosController@save"]);
 });
